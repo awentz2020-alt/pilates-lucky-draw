@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASI Pilates — All 4 Workbooks Lucky Draw</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes pop-in {
+      0% { transform: scale(0.86); opacity: 0.2; }
+      60% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: pop-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .slot-glow {
+      box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.45);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen flex items-center justify-center p-4 select-none">
+  <div class="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+    
+    <!-- Confetti Canvas Overlay -->
+    <canvas id="confetti-canvas" class="pointer-events-none absolute inset-0 w-full h-full z-20"></canvas>
+
+    <!-- Header & Workbook Filter Pills -->
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-indigo-600 text-white font-bold text-base shadow">
+          ✦
+        </span>
+        <div>
+          <h1 class="font-bold text-lg leading-tight text-white">All 4 Workbooks Lucky Draw</h1>
+          <p class="text-slate-400 text-xs" id="pool-counter">258 exercises in pool</p>
+        </div>
+      </div>
+
+      <!-- Workbook Filter Pills -->
+      <div class="flex flex-wrap items-center gap-1.5" id="book-filter-group">
+        <button data-book="all" class="book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-indigo-600 text-white cursor-pointer">
+          All 4 Books (258)
+        </button>
+        <button data-book="基礎核心床凱迪" class="book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 cursor-pointer">
+          基礎核心床凱迪 (95)
+        </button>
+        <button data-book="進階核心床凱迪" class="book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 cursor-pointer">
+          進階核心床凱迪 (63)
+        </button>
+        <button data-book="基礎穩定椅" class="book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 cursor-pointer">
+          基礎穩定椅 (32)
+        </button>
+        <button data-book="進階穩定椅提桶" class="book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 cursor-pointer">
+          進階穩定椅提桶 (68)
+        </button>
+      </div>
+    </div>
+
+    <!-- Apparatus Quick Filter Row -->
+    <div class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar pb-2 mb-4" id="app-filter-group">
+      <button data-app="all" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-indigo-500 bg-slate-800 text-white cursor-pointer">
+        All Apparatus (258)
+      </button>
+      <button data-app="Reformer" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Reformer (99)
+      </button>
+      <button data-app="Cadillac" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Cadillac (59)
+      </button>
+      <button data-app="Wunda Chair" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Wunda Chair (34)
+      </button>
+      <button data-app="F2 Chair" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        F2 Chair (19)
+      </button>
+      <button data-app="Spine Corrector" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Spine Corrector (17)
+      </button>
+      <button data-app="F2 Spine Corrector" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        F2 Spine Corrector (10)
+      </button>
+      <button data-app="Ladder Barrel" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Ladder Barrel (10)
+      </button>
+      <button data-app="Ped-a-Pul" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Ped-a-Pul (5)
+      </button>
+      <button data-app="Pole" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Pole (4)
+      </button>
+    </div>
+
+    <!-- Lucky Draw Display Window -->
+    <div id="slot-window" class="relative bg-slate-950 border-2 border-slate-800 rounded-xl p-7 mb-5 text-center slot-glow min-h-[185px] flex flex-col items-center justify-center overflow-hidden">
+      
+      <!-- Live Audio Spectrum Visualizer Canvas (Background) -->
+      <canvas id="audio-viz-canvas" class="pointer-events-none absolute inset-x-0 bottom-0 w-full h-16 opacity-35 z-0"></canvas>
+
+      <!-- Top & Bottom subtle reel lines -->
+      <div id="prev-preview" class="relative z-10 text-slate-500 opacity-45 text-xs font-medium tracking-wide truncate max-w-full h-4 mb-2 transition-all duration-75">
+        Short Spine · Pike Sitting · Roll-Up with PTBar
+      </div>
+
+      <!-- Main Selected Exercise Title -->
+      <div id="main-display" class="relative z-10 my-1 px-2">
+        <div id="exercise-title" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-snug">
+          Ready to Draw!
+        </div>
+        <div id="exercise-badges" class="flex flex-wrap items-center justify-center gap-1.5 mt-3 min-h-[24px]">
+          <span class="px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-400 text-xs">
+            Push the button below to draw from all 4 workbooks
+          </span>
+        </div>
+      </div>
+
+      <div id="next-preview" class="relative z-10 text-slate-500 opacity-45 text-xs font-medium tracking-wide truncate max-w-full h-4 mt-2 transition-all duration-75">
+        Semi-Circle · Hug-a-Tree · Swan
+      </div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <!-- Left Options & Pro Sound Controls -->
+      <div class="flex flex-wrap items-center gap-3">
+        <label class="inline-flex items-center gap-1.5 cursor-pointer text-xs text-slate-400 hover:text-slate-200">
+          <input type="checkbox" id="no-repeat-toggle" class="rounded border-slate-700 accent-indigo-600 w-4 h-4 cursor-pointer" checked>
+          <span>No repeats</span>
+        </label>
+
+        <div class="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-xl border border-slate-800 bg-slate-950">
+          <label class="inline-flex items-center gap-1 cursor-pointer text-xs text-slate-200 font-medium">
+            <input type="checkbox" id="sound-toggle" class="rounded border-slate-700 accent-indigo-600 w-4 h-4 cursor-pointer" checked>
+            <span id="speaker-icon">🔊</span>
+          </label>
+          <input type="range" id="volume-slider" min="0" max="100" value="85" title="Master Volume" class="w-16 h-1.5 accent-indigo-500 cursor-pointer">
+          <select id="sound-preset" class="text-xs rounded px-1.5 py-0.5 bg-slate-900 text-slate-200 border border-slate-800 cursor-pointer outline-none font-medium">
+            <option value="celesta">✨ FM Celesta & Rhodes</option>
+            <option value="orchestra">🎻 Grand Symphony</option>
+            <option value="marimba">🪵 Acoustic Marimba</option>
+            <option value="casino">🎡 Vegas Mechanical Wheel</option>
+            <option value="cyber">🚀 Cyber Synthwave</option>
+            <option value="zen">🧘 Tibetan Sanctuary</option>
+          </select>
+          <button id="test-sound-btn" title="Preview Fanfare" class="px-2 py-0.5 rounded-md text-xs bg-slate-800 text-slate-200 hover:bg-slate-700 active:scale-95 transition-all cursor-pointer">
+            ♪ Test
+          </button>
+        </div>
+
+        <button id="reset-btn" class="text-xs text-indigo-400 hover:text-indigo-300 underline decoration-dotted hidden cursor-pointer">
+          Reset pool
+        </button>
+      </div>
+
+      <!-- Main Push Button -->
+      <button id="draw-btn" class="flex-1 sm:flex-initial min-w-[190px] px-7 py-3 rounded-xl font-semibold text-sm bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/25 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer">
+        <span id="draw-btn-icon">🎲</span>
+        <span id="draw-btn-text">Draw Exercise</span>
+      </button>
+    </div>
+
+    <!-- Drawn History Strip -->
+    <div id="history-container" class="mt-5 pt-4 border-t border-slate-800 hidden">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-medium text-slate-400" id="history-label">Drawn History (0)</span>
+        <button id="clear-history-btn" class="text-xs text-slate-400 hover:text-slate-200 cursor-pointer">Clear</button>
+      </div>
+      <div id="history-list" class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar pb-1"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const EXERCISES = [
+      // ================= 1. 基礎核心床凱迪 (Foundation Reformer & Cadillac - 95 exercises) =================
+      // Reformer (67)
+      { book: "基礎核心床凱迪", app: "Reformer", p: 17, name: "Parallel Heels", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 18, name: "Parallel Toes", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 19, name: "V-Position Toes", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 20, name: "Open V-Position Heels", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 21, name: "Open V-Position Toes", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 22, name: "Calf Raises", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 23, name: "Prances", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 24, name: "Prehensile", series: "Supine Series", block: "Foot Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 25, name: "Single Leg Heel", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 26, name: "Single Leg Toes", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 27, name: "Hundred Prep", series: "", block: "Abdominal Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 28, name: "Hundred", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 29, name: "Coordination", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 30, name: "Round Back", series: "Short Box Series", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 31, name: "Flat Back", series: "Short Box Series", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 32, name: "Tilt", series: "Short Box Series", block: "Abdominal / Lateral Flexion", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 33, name: "Twist", series: "Short Box Series", block: "Abdominal / Lateral Flexion", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 34, name: "Roundabout", series: "Short Box Series", block: "Abdominal / Lateral Flexion", level: "Advanced" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 35, name: "Climb-a-Tree", series: "Short Box Series", block: "Abdominal Work", level: "Advanced" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 36, name: "Frog", series: "Hip Supine Series", block: "Hip Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 37, name: "Circles Down", series: "Hip Supine Series", block: "Hip Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 38, name: "Circles Up", series: "Hip Supine Series", block: "Hip Work", level: "Fundamental" },
+      { book: "font", app: "Reformer", p: 39, name: "Openings", series: "Hip Supine Series", block: "Hip Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 40, name: "Frog Extended", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 41, name: "Frog Extended Reverse", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 42, name: "Bottom Lift", series: "", block: "Spinal Articulation", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 43, name: "Bottom Lift with Extension", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 44, name: "Short Spine", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 46, name: "Long Spine", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 47, name: "Lunge Standing", series: "Hamstring Stretch Group", block: "Stretches", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 48, name: "Lunge Kneeling", series: "Hamstring Stretch Group", block: "Stretches", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 49, name: "Lunge Forward", series: "Hamstring Stretch Group", block: "Stretches", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 50, name: "Scooter Round Back", series: "Knee Stretch Group", block: "Full Body Integration I", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 51, name: "Scooter Flat Back", series: "Knee Stretch Group", block: "Full Body Integration I", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 52, name: "Knee Stretch Round Back", series: "Knee Stretch Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 53, name: "Knee Stretch Flat Back", series: "Knee Stretch Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 54, name: "Up Stretch 1", series: "Up Stretch Group", block: "Full Body Integration I", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 55, name: "Elephant", series: "Up Stretch Group", block: "Full Body Integration I", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 56, name: "Knee Stretch Reverse", series: "Knee Stretch Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 57, name: "Down Stretch", series: "Down Stretch Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 58, name: "Stomach Massage Round Back", series: "Stomach Massage Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 59, name: "Stomach Massage Flat Back", series: "Stomach Massage Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 60, name: "Stomach Massage Reaching", series: "Stomach Massage Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 61, name: "Up Stretch 2", series: "Up Stretch Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 62, name: "Long Stretch", series: "Up Stretch Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 63, name: "Extension", series: "Arms Supine Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 64, name: "Adduction", series: "Arms Supine Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 65, name: "Circles Up", series: "Arms Supine Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 66, name: "Circles Down", series: "Arms Supine Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 67, name: "Triceps", series: "Arms Supine Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 68, name: "Chest Expansion", series: "Arms Sitting Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 69, name: "Biceps", series: "Arms Sitting Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 70, name: "Rhomboids 1", series: "Arms Sitting Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 71, name: "Rhomboids 2", series: "Arms Sitting Series", block: "Arm Work", level: "Advanced" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 72, name: "Hug-a-Tree", series: "Arms Sitting Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 73, name: "Salute", series: "Arms Sitting Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 74, name: "Chest Expansion", series: "Arms Kneeling Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 75, name: "Circles Up", series: "Arms Kneeling Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 76, name: "Circles Down", series: "Arms Kneeling Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 77, name: "Triceps", series: "Arms Kneeling Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 78, name: "Biceps", series: "Arms Kneeling Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 79, name: "Mermaid", series: "", block: "Lateral Flexion/Rotation", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 80, name: "Breaststroke Prep 1", series: "Long Box Group", block: "Back Extension", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 81, name: "Breaststroke Prep 2", series: "Long Box Group", block: "Back Extension", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 82, name: "Breaststroke", series: "Long Box Group", block: "Back Extension", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 83, name: "Pulling Straps 1", series: "Long Box Group", block: "Back Extension", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Reformer", p: 84, name: "Pulling Straps 2", series: "Long Box Group", block: "Back Extension", level: "Intermediate" },
+
+      // Cadillac (28)
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 86, name: "Parallel Heels", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 87, name: "Parallel Toes", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 88, name: "V-Position Toes", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 89, name: "Open V-Position Heels", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 90, name: "Open V-Position Toes", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 91, name: "Calf Raises", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 92, name: "Prances", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 93, name: "Single Leg Heel", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 94, name: "Single Leg Toes", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 95, name: "Roll-Up with RUBar", series: "Warm-Up Series", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 96, name: "Spine Twist Supine with PTBar", series: "Warm-Up Series", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 97, name: "Mini Roll-Up", series: "Warm-Up Series", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 98, name: "Mini Roll-Up Oblique", series: "Warm-Up Series", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 99, name: "Roll-Up with PTBar", series: "Warm-Up Series", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 100, name: "Frog", series: "Hip Supine Series", block: "Hip Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 101, name: "Circles Down", series: "Hip Supine Series", block: "Hip Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 102, name: "Circles Up", series: "Hip Supine Series", block: "Hip Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 103, name: "Walking", series: "Hip Supine Series", block: "Hip Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 104, name: "Bicycle", series: "Hip Supine Series", block: "Hip Work", level: "Fundamental" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 105, name: "Frog", series: "Single Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 106, name: "Circles Down", series: "Single Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 107, name: "Circles Up", series: "Single Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 108, name: "Hip Extension", series: "Single Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 109, name: "Bicycle", series: "Single Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 110, name: "Monkey", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 111, name: "Tower Prep", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 112, name: "Sitting Forward", series: "Push Through Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "基礎核心床凱迪", app: "Cadillac", p: 113, name: "Side Reach", series: "Push Through Group", block: "Full Body Integration I", level: "Intermediate" },
+
+      // ================= 2. 進階核心床凱迪 (Graduate Reformer & Cadillac - 63 exercises) =================
+      // Reformer (32)
+      { book: "進階核心床凱迪", app: "Reformer", p: 17, name: "Double Leg", series: "Abdominals Legs in Straps", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 18, name: "Double Leg with Rotation", series: "Abdominals Legs in Straps", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 19, name: "Backstroke", series: "Long Box Group", block: "Abdominal Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 20, name: "Semi-Circle", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 21, name: "Semi-Circle Reverse", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 22, name: "Teaser Prep", series: "Long Box Group", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 23, name: "Shoulder Push Double Arm", series: "", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 24, name: "Shoulder Push Single Arm", series: "", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 25, name: "Rowing Back 1", series: "Rowing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 27, name: "Rowing Back 2", series: "Rowing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 28, name: "Rowing Front 1", series: "Rowing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 30, name: "Rowing Front 2", series: "Rowing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 32, name: "Deltoid Reach", series: "Arms Kneeling Side Series", block: "Arm Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 33, name: "Cross Arm Pull", series: "Arms Kneeling Side Series", block: "Arm Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 34, name: "Triceps", series: "Arms Kneeling Side Series", block: "Arm Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 35, name: "Arms Overhead", series: "Arms Kneeling Side Series", block: "Arm Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 36, name: "Hamstring Curl", series: "Long Box Group", block: "Leg Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 37, name: "Skating Single Leg", series: "", block: "Leg Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 38, name: "Split Side", series: "Split Side Group", block: "Leg Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 39, name: "Parallel Position", series: "Jumping Series", block: "Leg Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 40, name: "V-Position", series: "Jumping Series", block: "Leg Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 41, name: "Single Leg Parallel", series: "Jumping Series", block: "Leg Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 42, name: "Leg Changes", series: "Jumping Series", block: "Leg Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 43, name: "Teaser", series: "Long Box Group", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 44, name: "Up Stretch 3", series: "Up Stretch Group", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 45, name: "Up Stretch 3 Reverse", series: "Up Stretch Group", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 46, name: "Long Back Stretch", series: "", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 47, name: "Tendon Stretch", series: "", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 48, name: "Balance Control Front", series: "", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 49, name: "Balance Control Back Prep", series: "", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 50, name: "Balance Control Back", series: "", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Reformer", p: 51, name: "Side Over on Box", series: "", block: "Lateral Flexion/Rotation", level: "Intermediate" },
+
+      // Cadillac (31)
+      { book: "進階核心床凱迪", app: "Cadillac", p: 53, name: "Hip Opener", series: "", block: "Foot Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 54, name: "Roll-Up Bottom Loaded", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 55, name: "Bottom Lift with RUBar", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 56, name: "Breathing with PTBar", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 58, name: "Changes", series: "Lying Side Single Leg Series", block: "Hip Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 59, name: "Scissors", series: "Lying Side Single Leg Series", block: "Hip Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 60, name: "Circles Forward", series: "Lying Side Single Leg Series", block: "Hip Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 61, name: "Circles Back", series: "Lying Side Single Leg Series", block: "Hip Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 62, name: "Tower", series: "", block: "Spinal Articulation", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 63, name: "Shoulder Stretch Prone", series: "", block: "Stretches", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 64, name: "Cat Stretch Kneeling", series: "", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 65, name: "Teaser 1", series: "", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 66, name: "Chest Expansion", series: "Arms Standing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 67, name: "Hug-a-Tree", series: "Arms Standing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 68, name: "Circles Up", series: "Arms Standing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 69, name: "Circles Down", series: "Arms Standing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 70, name: "Punches", series: "Arms Standing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 71, name: "Biceps", series: "Arms Standing Series", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 72, name: "Shoulder Adduction Single Arm", series: "", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 73, name: "Shoulder Adduction Double Arm", series: "", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 74, name: "Sitting Side Prep", series: "", block: "Arm Work", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 75, name: "Squats", series: "", block: "Leg Work", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 76, name: "Thigh Stretch with RUBar", series: "", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 77, name: "Saw", series: "", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 78, name: "Sitting Back", series: "Push Through Group", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 79, name: "Sitting Side", series: "Push Through Group", block: "Lateral Flexion/Rotation", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 80, name: "Side Lift", series: "Push Through Group", block: "Lateral Flexion/Rotation", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 81, name: "Butterfly", series: "", block: "Lateral Flexion/Rotation", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 82, name: "Prone 1", series: "", block: "Back Extension", level: "Intermediate" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 83, name: "Prone 2", series: "", block: "Back Extension", level: "Advanced" },
+      { book: "進階核心床凱迪", app: "Cadillac", p: 84, name: "Hanging Back", series: "Hanging Group", block: "Back Extension", level: "Advanced" },
+
+      // ================= 3. 基礎穩定椅 (Foundation Auxiliary, F2, Wunda Chair - 32 exercises) =================
+      { book: "基礎穩定椅", app: "Pole", p: 18, name: "Shoulder Stretch", series: "Pole Series", block: "Stretches", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Pole", p: 19, name: "Overhead Stretch", series: "Pole Series", block: "Stretches", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Pole", p: 20, name: "Side Stretch", series: "Pole Series", block: "Stretches", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Pole", p: 21, name: "Spine Twist", series: "Pole Series", block: "Stretches", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Ped-a-Pul", p: 23, name: "Extension", series: "Arms Sitting/Standing Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Ped-a-Pul", p: 24, name: "Adduction", series: "Arms Sitting/Standing Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Ped-a-Pul", p: 25, name: "Circles Up", series: "Arms Sitting/Standing Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Ped-a-Pul", p: 26, name: "Circles Down", series: "Arms Sitting/Standing Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Ped-a-Pul", p: 27, name: "Triceps", series: "Arms Sitting/Standing Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "F2 Chair", p: 29, name: "Roll-Up with Extension", series: "Warm-up Series", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎穩定椅", app: "F2 Chair", p: 30, name: "Mini Roll-Up", series: "Warm-up Series", block: "Abdominal Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "F2 Chair", p: 31, name: "Mini Roll-Up Oblique", series: "Warm-up Series", block: "Abdominal Work", level: "Intermediate" },
+      { book: "基礎穩定椅", app: "F2 Chair", p: 32, name: "Chest Expansion", series: "Arms Sitting Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "F2 Chair", p: 33, name: "Biceps", series: "Arms Sitting Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "F2 Chair", p: 34, name: "Rhomboids 1", series: "Arms Sitting Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "F2 Chair", p: 35, name: "Rhomboids 2", series: "Arms Sitting Series", block: "Arm Work", level: "Intermediate" },
+      { book: "基礎穩定椅", app: "F2 Chair", p: 36, name: "Hug-a-Tree", series: "Arms Sitting Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "F2 Chair", p: 37, name: "Salute", series: "Arms Sitting Series", block: "Arm Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 39, name: "Parallel Heels", series: "Sitting Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 40, name: "Parallel Toes", series: "Sitting Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 41, name: "V-Position Toes", series: "Sitting Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 42, name: "Open V-Position Heels", series: "Sitting Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 43, name: "Open V-Position Toes", series: "Sitting Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 44, name: "Calf Raises", series: "Sitting Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 45, name: "Single Leg Heel", series: "Sitting Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 46, name: "Single Leg Toes", series: "Sitting Series", block: "Foot Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 47, name: "Pike Standing", series: "", block: "Abdominal Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 48, name: "Pike Standing Reverse", series: "", block: "Abdominal Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 49, name: "Leg Press Standing", series: "", block: "Leg Work", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 50, name: "Side Over", series: "", block: "Lateral Flexion/Rotation", level: "Fundamental" },
+      { book: "基礎穩定椅", app: "Wunda Chair", p: 51, name: "Swan", series: "", block: "Back Extension", level: "Fundamental" },
+
+      // ================= 4. 進階穩定椅提桶 (Graduate Wunda Chair, F2, Auxiliary - 68 exercises) =================
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 18, name: "Pike Sitting", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 19, name: "Pike Forward", series: "", block: "Abdominal Work", level: "Advanced" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 20, name: "Pelvic Curl", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 21, name: "Jackknife", series: "", block: "Spinal Articulation", level: "Advanced" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 22, name: "Cat Stretch Kneeling", series: "", block: "Full Body Integration I", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 23, name: "Shrugs", series: "", block: "Arm Work", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 24, name: "Triceps Press Sit", series: "", block: "Arm Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 25, name: "Triceps Prone", series: "", block: "Arm Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 26, name: "Frog Back", series: "", block: "Arm Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 27, name: "Side Arm Kneeling", series: "", block: "Arm Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 28, name: "Hamstring Curl", series: "", block: "Leg Work", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 29, name: "Hip Opener", series: "", block: "Leg Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 30, name: "Lunge Forward Prep", series: "Lunge Group", block: "Leg Work", level: "Advanced" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 31, name: "Step Down Back", series: "Step Down Group", block: "Leg Work", level: "Advanced" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 32, name: "Frog Front", series: "", block: "Leg Work", level: "Advanced" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 33, name: "Torso Press Sit", series: "", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 34, name: "Tendon Stretch", series: "", block: "Full Body Integration II", level: "Advanced" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 35, name: "Side Stretch Kneeling", series: "", block: "Lateral Flexion/Rotation", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 36, name: "Pike Side", series: "", block: "Lateral Flexion/Rotation", level: "Advanced" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 37, name: "Swan on Floor", series: "", block: "Back Extension", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Wunda Chair", p: 38, name: "Swan Single Arm", series: "", block: "Back Extension", level: "Intermediate" },
+
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 40, name: "Shoulder Stretch Flexion", series: "", block: "Stretches", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 41, name: "Shoulder Stretch Extension", series: "", block: "Stretches", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 42, name: "Gluteals", series: "Ladder Barrel Stretch Series", block: "Stretches", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 43, name: "Hamstrings", series: "Ladder Barrel Stretch Series", block: "Stretches", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 44, name: "Adductors", series: "Ladder Barrel Stretch Series", block: "Stretches", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 45, name: "Hip Flexors", series: "Ladder Barrel Stretch Series", block: "Stretches", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 46, name: "Side Over Prep", series: "", block: "Lateral Flexion/Rotation", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 47, name: "Side Over", series: "", block: "Lateral Flexion/Rotation", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 48, name: "Swan Prep", series: "", block: "Back Extension", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Ladder Barrel", p: 49, name: "Swan", series: "", block: "Back Extension", level: "Advanced" },
+
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 51, name: "Chest Lift", series: "", block: "Abdominal Work", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 52, name: "Reach", series: "", block: "Abdominal Work", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 53, name: "Overhead Stretch", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 54, name: "Teaser Prep", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 55, name: "Openings", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 56, name: "Helicopter", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 57, name: "Scissors", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 58, name: "Bicycle", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 59, name: "Bicycle Reverse", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 60, name: "Roll Over", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 61, name: "Shoulder Stretch Lying Side", series: "", block: "Stretches", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 62, name: "Spine Twist Supine", series: "", block: "Lateral Flexion/Rotation", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 63, name: "Side Lift", series: "", block: "Lateral Flexion/Rotation", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 64, name: "Corkscrew", series: "", block: "Lateral Flexion/Rotation", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 65, name: "Corkscrew Advanced", series: "", block: "Lateral Flexion/Rotation", level: "Advanced" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 66, name: "Swan Prep", series: "", block: "Back Extension", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "Spine Corrector", p: 67, name: "Swan", series: "", block: "Back Extension", level: "Advanced" },
+
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 69, name: "Reach", series: "", block: "Abdominal Work", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 70, name: "Hundred Prep", series: "", block: "Abdominal Work", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 71, name: "Teaser Prep", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 72, name: "Frog", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 73, name: "Openings", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 74, name: "Scissors", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 75, name: "Helicopter", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 76, name: "Roll Over", series: "", block: "Spinal Articulation", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 77, name: "Side Lift", series: "", block: "Lateral Flexion/Rotation", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Spine Corrector", p: 78, name: "Swan", series: "", block: "Back Extension", level: "Intermediate" },
+
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 80, name: "Hundred Prep", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 81, name: "Leg Changes 1", series: "", block: "Abdominal Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 82, name: "Frog", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 83, name: "Circles Down", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 84, name: "Circles Up", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 85, name: "Openings", series: "Hip Supine Series", block: "Hip Work", level: "Intermediate" },
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 86, name: "Bottom Lift", series: "", block: "Spinal Articulation", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 87, name: "Semi-Circle", series: "", block: "Spinal Articulation", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 88, name: "Lunge Kneeling", series: "", block: "Stretches", level: "Fundamental" },
+      { book: "進階穩定椅提桶", app: "F2 Chair", p: 89, name: "Swan", series: "", block: "Back Extension", level: "Intermediate" }
+    ];
+
+    // Fix any typo in book name and assign unique IDs
+    EXERCISES.forEach((ex, i) => {
+      if (ex.book === "font") ex.book = "基礎核心床凱迪";
+      ex.id = `${ex.book}_${ex.p}_${i}`;
+    });
+
+    let activeBook = "all";
+    let activeApp = "all";
+    let drawnIds = new Set();
+    let historyList = [];
+    let isSpinning = false;
+    let audioCtx = null;
+
+    // Elements
+    const poolCounter = document.getElementById("pool-counter");
+    const prevPreview = document.getElementById("prev-preview");
+    const nextPreview = document.getElementById("next-preview");
+    const exerciseTitle = document.getElementById("exercise-title");
+    const exerciseBadges = document.getElementById("exercise-badges");
+    const drawBtn = document.getElementById("draw-btn");
+    const drawBtnText = document.getElementById("draw-btn-text");
+    const drawBtnIcon = document.getElementById("draw-btn-icon");
+    const noRepeatToggle = document.getElementById("no-repeat-toggle");
+    const soundToggle = document.getElementById("sound-toggle");
+    const speakerIcon = document.getElementById("speaker-icon");
+    const volumeSlider = document.getElementById("volume-slider");
+    const soundPreset = document.getElementById("sound-preset");
+    const testSoundBtn = document.getElementById("test-sound-btn");
+    const resetBtn = document.getElementById("reset-btn");
+    const historyContainer = document.getElementById("history-container");
+    const historyLabel = document.getElementById("history-label");
+    const historyListEl = document.getElementById("history-list");
+    const clearHistoryBtn = document.getElementById("clear-history-btn");
+    const bookBtns = document.querySelectorAll(".book-btn");
+    const appBtns = document.querySelectorAll(".app-btn");
+
+    // ================= FLAGSHIP FM & PHYSICAL-MODELING SOUND ENGINE =================
+    let masterBus = null;
+    let masterGainNode = null;
+    let analyserNode = null;
+    let noiseBuffer = null;
+    let vizAnimId = null;
+    const vizCanvas = document.getElementById("audio-viz-canvas");
+    const vizCtx = vizCanvas ? vizCanvas.getContext("2d") : null;
+
+    function initAudioEngine() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      if (!masterBus) {
+        const now = audioCtx.currentTime;
+        const sampleRate = audioCtx.sampleRate;
+
+        const compressor = audioCtx.createDynamicsCompressor();
+        compressor.threshold.setValueAtTime(-14, now);
+        compressor.knee.setValueAtTime(14, now);
+        compressor.ratio.setValueAtTime(5, now);
+        compressor.attack.setValueAtTime(0.002, now);
+        compressor.release.setValueAtTime(0.16, now);
+
+        masterGainNode = audioCtx.createGain();
+        const vol = volumeSlider ? parseInt(volumeSlider.value, 10) / 100 : 0.85;
+        masterGainNode.gain.setValueAtTime(vol, now);
+
+        analyserNode = audioCtx.createAnalyser();
+        analyserNode.fftSize = 64;
+        analyserNode.smoothingTimeConstant = 0.78;
+
+        const revLen = Math.floor(sampleRate * 1.45);
+        const impulse = audioCtx.createBuffer(2, revLen, sampleRate);
+        for (let ch = 0; ch < 2; ch++) {
+          const data = impulse.getChannelData(ch);
+          for (let i = 0; i < revLen; i++) {
+            const env = Math.pow(1 - i / revLen, 2.8);
+            const early = i < sampleRate * 0.045 ? Math.sin(i * 0.08) * 0.35 : 1;
+            data[i] = (Math.random() * 2 - 1) * env * early;
+          }
+        }
+        const reverb = audioCtx.createConvolver();
+        reverb.buffer = impulse;
+        const reverbWet = audioCtx.createGain();
+        reverbWet.gain.setValueAtTime(0.26, now);
+
+        const delayL = audioCtx.createDelay(1.0);
+        const delayR = audioCtx.createDelay(1.0);
+        delayL.delayTime.setValueAtTime(0.165, now);
+        delayR.delayTime.setValueAtTime(0.22, now);
+        const fbL = audioCtx.createGain();
+        const fbR = audioCtx.createGain();
+        fbL.gain.setValueAtTime(0.22, now);
+        fbR.gain.setValueAtTime(0.22, now);
+        const delayFilter = audioCtx.createBiquadFilter();
+        delayFilter.type = "lowpass";
+        delayFilter.frequency.setValueAtTime(2800, now);
+        const delayWet = audioCtx.createGain();
+        delayWet.gain.setValueAtTime(0.16, now);
+
+        const merger = audioCtx.createChannelMerger(2);
+        delayL.connect(fbL);
+        fbL.connect(delayR);
+        delayR.connect(fbR);
+        fbR.connect(delayL);
+        delayL.connect(merger, 0, 0);
+        delayR.connect(merger, 0, 1);
+        merger.connect(delayFilter);
+        delayFilter.connect(delayWet);
+
+        masterBus = audioCtx.createGain();
+        masterBus.connect(compressor);
+        masterBus.connect(reverb);
+        reverb.connect(reverbWet);
+        reverbWet.connect(compressor);
+        masterBus.connect(delayL);
+        delayWet.connect(compressor);
+
+        compressor.connect(masterGainNode);
+        masterGainNode.connect(analyserNode);
+        analyserNode.connect(audioCtx.destination);
+
+        const nLen = Math.floor(sampleRate * 0.12);
+        noiseBuffer = audioCtx.createBuffer(1, nLen, sampleRate);
+        const nData = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < nLen; i++) {
+          nData[i] = (Math.random() * 2 - 1) * Math.exp(-i / (sampleRate * 0.015));
+        }
+
+        startVisualizer();
+      }
+    }
+
+    function startVisualizer() {
+      if (!vizCanvas || !vizCtx || vizAnimId) return;
+      const dataArray = new Uint8Array(analyserNode.frequencyBinCount);
+      function drawViz() {
+        vizAnimId = requestAnimationFrame(drawViz);
+        if (!analyserNode) return;
+        analyserNode.getByteFrequencyData(dataArray);
+        vizCanvas.width = vizCanvas.offsetWidth;
+        vizCanvas.height = vizCanvas.offsetHeight;
+        vizCtx.clearRect(0, 0, vizCanvas.width, vizCanvas.height);
+
+        const bars = 20;
+        const step = Math.floor(dataArray.length / bars);
+        const barWidth = (vizCanvas.width / bars) * 0.65;
+        const gap = (vizCanvas.width / bars) * 0.35;
+
+        for (let i = 0; i < bars; i++) {
+          const val = dataArray[i * step] / 255;
+          if (val <= 0.02) continue;
+          const h = Math.max(3, val * vizCanvas.height * 0.9);
+          const x = i * (barWidth + gap) + gap / 2;
+          const y = vizCanvas.height - h;
+          vizCtx.fillStyle = `rgba(99, 102, 241, ${0.25 + val * 0.65})`;
+          vizCtx.beginPath();
+          vizCtx.roundRect(x, y, barWidth, h, 3);
+          vizCtx.fill();
+        }
+      }
+      drawViz();
+    }
+
+    function playFMVoice({
+      freq,
+      carrierType = "sine",
+      modRatio = 2.0,
+      modIndex = 0,
+      modDecay = 0.08,
+      attack = 0.003,
+      decay = 0.15,
+      gain = 0.12,
+      detune = 0,
+      pan = 0,
+      filterFreq = 0,
+      delay = 0,
+      pitchEnd = 0
+    }) {
+      if (!soundToggle.checked) return;
+      try {
+        initAudioEngine();
+        const t0 = audioCtx.currentTime + delay;
+
+        const carrier = audioCtx.createOscillator();
+        const vGain = audioCtx.createGain();
+        carrier.type = carrierType;
+        carrier.frequency.setValueAtTime(freq, t0);
+        if (pitchEnd > 0) {
+          carrier.frequency.exponentialRampToValueAtTime(pitchEnd, t0 + decay);
+        }
+        if (detune !== 0) {
+          carrier.detune.setValueAtTime(detune, t0);
+        }
+
+        if (modIndex > 0) {
+          const mod = audioCtx.createOscillator();
+          const modGain = audioCtx.createGain();
+          mod.type = "sine";
+          mod.frequency.setValueAtTime(freq * modRatio, t0);
+          modGain.gain.setValueAtTime(freq * modIndex, t0);
+          modGain.gain.exponentialRampToValueAtTime(0.01, t0 + Math.max(0.02, modDecay));
+          mod.connect(modGain);
+          modGain.connect(carrier.frequency);
+          mod.start(t0);
+          mod.stop(t0 + attack + decay + 0.03);
+        }
+
+        vGain.gain.setValueAtTime(0.0001, t0);
+        vGain.gain.linearRampToValueAtTime(gain, t0 + attack);
+        vGain.gain.exponentialRampToValueAtTime(0.0001, t0 + attack + decay);
+
+        let lastNode = carrier;
+        if (filterFreq > 0) {
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = "lowpass";
+          filter.frequency.setValueAtTime(filterFreq, t0);
+          filter.Q.setValueAtTime(2.2, t0);
+          lastNode.connect(filter);
+          lastNode = filter;
+        }
+
+        lastNode.connect(vGain);
+
+        if (audioCtx.createStereoPanner && pan !== 0) {
+          const panner = audioCtx.createStereoPanner();
+          panner.pan.setValueAtTime(Math.max(-1, Math.min(1, pan)), t0);
+          vGain.connect(panner);
+          panner.connect(masterBus);
+        } else {
+          vGain.connect(masterBus);
+        }
+
+        carrier.start(t0);
+        carrier.stop(t0 + attack + decay + 0.03);
+      } catch (e) {}
+    }
+
+    function playNoiseBurst({ filterFreq = 1800, q = 3.5, gain = 0.08, decay = 0.03, pan = 0, delay = 0 }) {
+      if (!soundToggle.checked) return;
+      try {
+        initAudioEngine();
+        const t0 = audioCtx.currentTime + delay;
+        const src = audioCtx.createBufferSource();
+        src.buffer = noiseBuffer;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = "bandpass";
+        filter.frequency.setValueAtTime(filterFreq, t0);
+        filter.Q.setValueAtTime(q, t0);
+
+        const nGain = audioCtx.createGain();
+        nGain.gain.setValueAtTime(gain, t0);
+        nGain.gain.exponentialRampToValueAtTime(0.0001, t0 + decay);
+
+        src.connect(filter);
+        filter.connect(nGain);
+
+        if (audioCtx.createStereoPanner && pan !== 0) {
+          const panner = audioCtx.createStereoPanner();
+          panner.pan.setValueAtTime(Math.max(-1, Math.min(1, pan)), t0);
+          nGain.connect(panner);
+          panner.connect(masterBus);
+        } else {
+          nGain.connect(masterBus);
+        }
+
+        src.start(t0);
+        src.stop(t0 + decay + 0.01);
+      } catch (e) {}
+    }
+
+    function playUIClick(style = "filter") {
+      if (!soundToggle.checked) return;
+      if (style === "start") {
+        playNoiseBurst({ filterFreq: 1600, q: 2.2, gain: 0.09, decay: 0.03 });
+        playFMVoice({ freq: 140, pitchEnd: 560, modRatio: 1.5, modIndex: 1.2, modDecay: 0.1, attack: 0.004, decay: 0.14, gain: 0.13 });
+      } else {
+        playNoiseBurst({ filterFreq: 2800, q: 4.5, gain: 0.04, decay: 0.015 });
+        playFMVoice({ freq: 740, pitchEnd: 980, modRatio: 2, modIndex: 0.8, modDecay: 0.03, attack: 0.002, decay: 0.045, gain: 0.05 });
+      }
+    }
+
+    const LYDIAN_SCALE = [
+      261.63, 293.66, 329.63, 369.99, 392.00, 440.00, 493.88,
+      523.25, 587.33, 659.25, 739.99, 783.99, 880.00, 987.77, 1046.50
+    ];
+
+    function playReelStep(step, totalSteps) {
+      if (!soundToggle.checked) return;
+      const preset = soundPreset ? soundPreset.value : "celesta";
+      const progress = step / totalSteps;
+      const pan = Math.sin(step * 0.85) * 0.55;
+      const noteIdx = Math.min(LYDIAN_SCALE.length - 1, Math.floor(progress * LYDIAN_SCALE.length));
+      const baseNote = LYDIAN_SCALE[noteIdx];
+
+      if (preset === "celesta") {
+        playFMVoice({
+          freq: baseNote * 1.5,
+          carrierType: "sine",
+          modRatio: 14.0,
+          modIndex: 2.2 - progress * 1.0,
+          modDecay: 0.035,
+          attack: 0.002,
+          decay: 0.12 + progress * 0.08,
+          gain: 0.13,
+          pan
+        });
+        playFMVoice({
+          freq: baseNote * 0.75,
+          carrierType: "sine",
+          modRatio: 1.0,
+          modIndex: 0.8,
+          modDecay: 0.08,
+          attack: 0.003,
+          decay: 0.1,
+          gain: 0.06,
+          pan: -pan
+        });
+      } else if (preset === "orchestra") {
+        playFMVoice({
+          freq: baseNote,
+          carrierType: "triangle",
+          modRatio: 3.0,
+          modIndex: 1.4,
+          modDecay: 0.04,
+          attack: 0.003,
+          decay: 0.11 + progress * 0.06,
+          gain: 0.13,
+          filterFreq: 2400,
+          pan
+        });
+        playNoiseBurst({ filterFreq: 1900, q: 3.8, gain: 0.04, decay: 0.02, pan });
+        if (totalSteps - step <= 4) {
+          playFMVoice({ freq: 98.0, pitchEnd: 65.41, carrierType: "sine", modRatio: 1.5, modIndex: 1.5, modDecay: 0.08, attack: 0.004, decay: 0.18, gain: 0.15 });
+        }
+      } else if (preset === "marimba") {
+        playFMVoice({
+          freq: baseNote,
+          carrierType: "sine",
+          modRatio: 4.0,
+          modIndex: 1.6,
+          modDecay: 0.025,
+          attack: 0.002,
+          decay: 0.11 + progress * 0.06,
+          gain: 0.15,
+          pan
+        });
+        playFMVoice({ freq: baseNote * 9.2, carrierType: "sine", attack: 0.001, decay: 0.015, gain: 0.025, pan });
+        playNoiseBurst({ filterFreq: 1500 + step * 35, q: 4.5, gain: 0.05, decay: 0.018, pan });
+      } else if (preset === "casino") {
+        const pegFreq = 310 + (step % 4) * 22 + progress * 85;
+        playNoiseBurst({ filterFreq: 2600 - progress * 600, q: 3.0, gain: 0.15, decay: 0.022, pan });
+        playFMVoice({
+          freq: pegFreq,
+          pitchEnd: pegFreq * 0.48,
+          carrierType: "triangle",
+          modRatio: 2.5,
+          modIndex: 1.8,
+          modDecay: 0.02,
+          attack: 0.001,
+          decay: 0.042,
+          gain: 0.14,
+          pan
+        });
+      } else if (preset === "cyber") {
+        const arpFreq = 196 * Math.pow(2, step / 13);
+        playFMVoice({ freq: arpFreq, carrierType: "sawtooth", modRatio: 2.0, modIndex: 1.2, modDecay: 0.04, attack: 0.002, decay: 0.075, gain: 0.07, detune: -8, filterFreq: 2800, pan });
+        playFMVoice({ freq: arpFreq, carrierType: "sawtooth", modRatio: 2.0, modIndex: 1.2, modDecay: 0.04, attack: 0.002, decay: 0.075, gain: 0.07, detune: 8, filterFreq: 2800, pan: -pan });
+        playFMVoice({ freq: arpFreq * 0.5, carrierType: "square", attack: 0.002, decay: 0.05, gain: 0.05, filterFreq: 900 });
+      } else if (preset === "zen") {
+        playFMVoice({
+          freq: baseNote * 1.25,
+          carrierType: "sine",
+          modRatio: 2.756,
+          modIndex: 1.1,
+          modDecay: 0.14,
+          attack: 0.006,
+          decay: 0.24,
+          gain: 0.11,
+          pan
+        });
+      }
+    }
+
+    function playWinChime() {
+      if (!soundToggle.checked) return;
+      const preset = soundPreset ? soundPreset.value : "celesta";
+
+      if (preset === "celesta") {
+        playFMVoice({ freq: 130.81, carrierType: "sine", modRatio: 1.0, modIndex: 1.2, modDecay: 0.5, attack: 0.01, decay: 1.1, gain: 0.16 });
+        const notes = [523.25, 659.25, 783.99, 987.77, 1174.66, 1479.98, 1567.98];
+        notes.forEach((n, i) => {
+          const pan = (i / (notes.length - 1) - 0.5) * 0.85;
+          playFMVoice({
+            freq: n,
+            carrierType: "sine",
+            modRatio: 14.0,
+            modIndex: 2.0,
+            modDecay: 0.05,
+            attack: 0.003,
+            decay: 0.75,
+            gain: 0.11,
+            pan,
+            delay: i * 0.052
+          });
+          playFMVoice({
+            freq: n * 0.5,
+            carrierType: "triangle",
+            modRatio: 2.0,
+            modIndex: 0.9,
+            modDecay: 0.25,
+            attack: 0.008,
+            decay: 0.65,
+            gain: 0.06,
+            pan: -pan,
+            delay: i * 0.052
+          });
+        });
+      } else if (preset === "orchestra") {
+        playFMVoice({ freq: 130.81, pitchEnd: 130.0, carrierType: "sine", modRatio: 1.5, modIndex: 2.0, modDecay: 0.2, attack: 0.005, decay: 0.9, gain: 0.18 });
+        playNoiseBurst({ filterFreq: 3500, q: 1.8, gain: 0.09, decay: 0.08 });
+        const fanfare = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+        fanfare.forEach((n, i) => {
+          const d = i * 0.048;
+          const pan = (i % 2 === 0 ? -1 : 1) * 0.45;
+          playFMVoice({ freq: n, carrierType: "sawtooth", modRatio: 1.0, modIndex: 1.5, modDecay: 0.3, attack: 0.015, decay: 0.85, gain: 0.075, filterFreq: 2800, detune: -7, pan, delay: d });
+          playFMVoice({ freq: n, carrierType: "sawtooth", modRatio: 1.0, modIndex: 1.5, modDecay: 0.3, attack: 0.015, decay: 0.85, gain: 0.075, filterFreq: 2800, detune: 7, pan: -pan, delay: d });
+        });
+      } else if (preset === "marimba") {
+        playFMVoice({ freq: 130.81, carrierType: "sine", modRatio: 4.0, modIndex: 1.2, modDecay: 0.08, attack: 0.004, decay: 0.85, gain: 0.16 });
+        const run = [523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51, 1567.98];
+        run.forEach((n, i) => {
+          const pan = (i / (run.length - 1) - 0.5) * 0.8;
+          playFMVoice({ freq: n, carrierType: "sine", modRatio: 4.0, modIndex: 1.8, modDecay: 0.03, attack: 0.002, decay: 0.55, gain: 0.13, pan, delay: i * 0.05 });
+          playNoiseBurst({ filterFreq: 1800 + i * 200, q: 4.0, gain: 0.04, decay: 0.02, pan, delay: i * 0.05 });
+        });
+      } else if (preset === "casino") {
+        const bells = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+        bells.forEach((n, i) => {
+          const d = i * 0.06;
+          playFMVoice({ freq: n * 2, carrierType: "sine", modRatio: 3.14, modIndex: 2.5, modDecay: 0.06, attack: 0.001, decay: 0.35, gain: 0.09, pan: Math.sin(i * 2) * 0.6, delay: d });
+          playFMVoice({ freq: n, carrierType: "sawtooth", attack: 0.005, decay: 0.45, gain: 0.07, filterFreq: 2600, delay: d });
+        });
+      } else if (preset === "cyber") {
+        playFMVoice({ freq: 130.81, pitchEnd: 65.41, carrierType: "sawtooth", filterFreq: 600, attack: 0.005, decay: 0.7, gain: 0.16 });
+        const arp = [261.63, 392.00, 523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+        arp.forEach((n, i) => {
+          playFMVoice({ freq: n, carrierType: "sawtooth", modRatio: 2.0, modIndex: 1.5, modDecay: 0.06, attack: 0.002, decay: 0.22, gain: 0.075, filterFreq: 3400, pan: Math.cos(i) * 0.6, delay: i * 0.04 });
+        });
+        [261.63, 329.63, 392.00, 493.88, 587.33].forEach((n, i) => {
+          playFMVoice({ freq: n * 2, carrierType: "sawtooth", attack: 0.015, decay: 0.85, gain: 0.055, detune: (i - 2) * 9, filterFreq: 2600, delay: 0.28 });
+        });
+      } else if (preset === "zen") {
+        const bowls = [261.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+        bowls.forEach((n, i) => {
+          const pan = (i % 2 === 0 ? -1 : 1) * 0.45;
+          playFMVoice({ freq: n, carrierType: "sine", modRatio: 2.756, modIndex: 1.2, modDecay: 0.35, attack: 0.02, decay: 1.4, gain: 0.1, pan, delay: i * 0.075 });
+          playFMVoice({ freq: n * 1.004, carrierType: "sine", attack: 0.03, decay: 1.3, gain: 0.06, pan: -pan, delay: i * 0.075 });
+        });
+      }
+    }
+
+    function updateFilterCounts() {
+      bookBtns.forEach(btn => {
+        const b = btn.dataset.book;
+        const count = EXERCISES.filter(e => (b === "all" || e.book === b) && (activeApp === "all" || e.app === activeApp)).length;
+        const label = b === "all" ? "All 4 Books" : b;
+        btn.textContent = `${label} (${count})`;
+      });
+      appBtns.forEach(btn => {
+        const a = btn.dataset.app;
+        const count = EXERCISES.filter(e => (activeBook === "all" || e.book === activeBook) && (a === "all" || e.app === a)).length;
+        const label = a === "all" ? "All Apparatus" : a;
+        btn.textContent = `${label} (${count})`;
+      });
+    }
+
+    function matchesFilters(ex) {
+      const bookOk = activeBook === "all" || ex.book === activeBook;
+      const appOk = activeApp === "all" || ex.app === activeApp;
+      return bookOk && appOk;
+    }
+
+    function getFilteredPool() {
+      return EXERCISES.filter(ex => {
+        if (!matchesFilters(ex)) return false;
+        if (noRepeatToggle.checked && drawnIds.has(ex.id)) return false;
+        return true;
+      });
+    }
+
+    function getTotalMatchingFilter() {
+      return EXERCISES.filter(matchesFilters);
+    }
+
+    function updatePoolStatus() {
+      updateFilterCounts();
+      const available = getFilteredPool();
+      const total = getTotalMatchingFilter();
+      if (noRepeatToggle.checked) {
+        poolCounter.textContent = `${available.length} of ${total.length} exercises remaining`;
+        resetBtn.classList.toggle("hidden", drawnIds.size === 0);
+      } else {
+        poolCounter.textContent = `${total.length} exercises in pool`;
+        resetBtn.classList.add("hidden");
+      }
+
+      if (total.length === 0) {
+        drawBtnText.textContent = "No Matching Exercises";
+        drawBtn.disabled = true;
+      } else if (available.length === 0) {
+        drawBtnText.textContent = "Pool Empty – Reset & Draw";
+        drawBtn.disabled = false;
+      } else if (!isSpinning) {
+        drawBtnText.textContent = "Draw Exercise";
+        drawBtn.disabled = false;
+      }
+    }
+
+    function renderBadges(ex, isPlaceholder = false) {
+      if (isPlaceholder) {
+        exerciseBadges.innerHTML = `<span class="px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-400 text-xs">${ex.app} · ${ex.book}</span>`;
+        return;
+      }
+      const items = [
+        `<span class="px-2.5 py-0.5 rounded-md bg-indigo-600/90 text-white font-medium text-xs">${ex.app}</span>`,
+        `<span class="px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-200 font-medium text-xs">${ex.book}</span>`,
+        `<span class="px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-200 font-medium text-xs">${ex.level}</span>`,
+        `<span class="px-2.5 py-0.5 rounded-md border border-slate-700 text-slate-300 text-xs">${ex.block}</span>`
+      ];
+      if (ex.series) {
+        items.push(`<span class="px-2.5 py-0.5 rounded-md border border-slate-700 text-slate-300 text-xs">${ex.series}</span>`);
+      }
+      items.push(`<span class="px-2.5 py-0.5 rounded-md text-slate-400 text-xs">p. ${ex.p}</span>`);
+      exerciseBadges.innerHTML = items.join("");
+    }
+
+    function renderHistory() {
+      if (historyList.length === 0) {
+        historyContainer.classList.add("hidden");
+        return;
+      }
+      historyContainer.classList.remove("hidden");
+      historyLabel.textContent = `Drawn History (${historyList.length})`;
+      historyListEl.innerHTML = historyList
+        .map((ex, idx) => `
+          <span class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs border border-slate-800 bg-slate-950 text-slate-200">
+            <span class="text-slate-500 font-mono">#${historyList.length - idx}</span>
+            <span class="font-medium">${ex.name}</span>
+            <span class="text-slate-400">(${ex.app})</span>
+          </span>
+        `)
+        .join("");
+    }
+
+    const canvas = document.getElementById("confetti-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let animFrame = null;
+
+    function fireConfetti() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      const colors = ["#6366f1", "#10b981", "#f59e0b", "#ec4899", "#3b82f6", "#8b5cf6"];
+      for (let i = 0; i < 45; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          vx: (Math.random() - 0.5) * 11,
+          vy: (Math.random() - 0.75) * 10 - 2,
+          size: Math.random() * 5 + 3,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rot: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 12,
+          alpha: 1
+        });
+      }
+      if (!animFrame) animateConfetti();
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.28;
+        p.rot += p.vRot;
+        p.alpha -= 0.016;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rot * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65);
+        ctx.restore();
+      });
+      particles = particles.filter(p => p.alpha > 0 && p.y < canvas.height + 20);
+      if (particles.length > 0) {
+        animFrame = requestAnimationFrame(animateConfetti);
+      } else {
+        animFrame = null;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    function triggerDraw() {
+      if (isSpinning) return;
+      const totalMatching = getTotalMatchingFilter();
+      if (totalMatching.length === 0) return;
+
+      let pool = getFilteredPool();
+      if (pool.length === 0) {
+        totalMatching.forEach(ex => drawnIds.delete(ex.id));
+        pool = getFilteredPool();
+        updatePoolStatus();
+      }
+      if (pool.length === 0) return;
+
+      isSpinning = true;
+      playUIClick("start");
+      drawBtn.disabled = true;
+      drawBtn.classList.add("opacity-80");
+      drawBtnIcon.classList.add("animate-spin");
+      drawBtnText.textContent = "Drawing...";
+      exerciseTitle.classList.remove("animate-pop");
+
+      const randBuf = new Uint32Array(1);
+      window.crypto.getRandomValues(randBuf);
+      const winner = pool[randBuf[0] % pool.length];
+
+      const totalSteps = 26;
+      let step = 0;
+
+      function nextStep() {
+        step++;
+        if (step < totalSteps) {
+          const r1 = totalMatching[Math.floor(Math.random() * totalMatching.length)];
+          const r2 = totalMatching[Math.floor(Math.random() * totalMatching.length)];
+          const r3 = totalMatching[Math.floor(Math.random() * totalMatching.length)];
+
+          prevPreview.textContent = `${r1.name} (${r1.app})`;
+          exerciseTitle.textContent = r2.name;
+          nextPreview.textContent = `${r3.name} (${r3.app})`;
+          renderBadges(r2, true);
+
+          playReelStep(step, totalSteps);
+          const progress = step / totalSteps;
+          const delay = 32 + Math.pow(progress, 2.7) * 240;
+          setTimeout(nextStep, delay);
+        } else {
+          const idx = totalMatching.indexOf(winner);
+          const neighbor1 = totalMatching[(idx - 1 + totalMatching.length) % totalMatching.length];
+          const neighbor2 = totalMatching[(idx + 1) % totalMatching.length];
+
+          prevPreview.textContent = neighbor1 ? `${neighbor1.name} (${neighbor1.app})` : "";
+          nextPreview.textContent = neighbor2 ? `${neighbor2.name} (${neighbor2.app})` : "";
+
+          exerciseTitle.textContent = winner.name;
+          void exerciseTitle.offsetWidth;
+          exerciseTitle.classList.add("animate-pop");
+          renderBadges(winner, false);
+
+          if (noRepeatToggle.checked) {
+            drawnIds.add(winner.id);
+          }
+          historyList.unshift(winner);
+          renderHistory();
+          updatePoolStatus();
+
+          playWinChime();
+          fireConfetti();
+
+          isSpinning = false;
+          drawBtn.disabled = false;
+          drawBtn.classList.remove("opacity-80");
+          drawBtnIcon.classList.remove("animate-spin");
+        }
+      }
+
+      nextStep();
+    }
+
+    drawBtn.addEventListener("click", triggerDraw);
+
+    bookBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (isSpinning) return;
+        playUIClick("filter");
+        activeBook = btn.dataset.book;
+        bookBtns.forEach(b => {
+          const active = b === btn;
+          b.className = active
+            ? "book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-indigo-600 text-white cursor-pointer"
+            : "book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 cursor-pointer";
+        });
+        updatePoolStatus();
+      });
+    });
+
+    appBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (isSpinning) return;
+        playUIClick("filter");
+        activeApp = btn.dataset.app;
+        appBtns.forEach(b => {
+          const active = b === btn;
+          b.className = active
+            ? "app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-indigo-500 bg-slate-800 text-white cursor-pointer"
+            : "app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer";
+        });
+        updatePoolStatus();
+      });
+    });
+
+    soundPreset.addEventListener("change", () => {
+      playWinChime();
+    });
+
+    if (testSoundBtn) {
+      testSoundBtn.addEventListener("click", () => {
+        playWinChime();
+      });
+    }
+
+    if (volumeSlider) {
+      volumeSlider.addEventListener("input", () => {
+        const v = parseInt(volumeSlider.value, 10) / 100;
+        if (masterGainNode && audioCtx) {
+          masterGainNode.gain.setValueAtTime(v, audioCtx.currentTime);
+        }
+        if (speakerIcon) {
+          speakerIcon.textContent = v === 0 || !soundToggle.checked ? "🔇" : v < 0.45 ? "🔉" : "🔊";
+        }
+      });
+    }
+
+    soundToggle.addEventListener("change", () => {
+      if (speakerIcon) {
+        const v = volumeSlider ? parseInt(volumeSlider.value, 10) / 100 : 0.85;
+        speakerIcon.textContent = !soundToggle.checked || v === 0 ? "🔇" : v < 0.45 ? "🔉" : "🔊";
+      }
+    });
+
+    noRepeatToggle.addEventListener("change", updatePoolStatus);
+
+    resetBtn.addEventListener("click", () => {
+      drawnIds.clear();
+      updatePoolStatus();
+    });
+
+    clearHistoryBtn.addEventListener("click", () => {
+      historyList = [];
+      drawnIds.clear();
+      renderHistory();
+      updatePoolStatus();
+    });
+
+    updatePoolStatus();
+  </script>
+</body>
+</html>
