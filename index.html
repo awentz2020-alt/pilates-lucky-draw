@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BASI Pilates — All 4 Workbooks Lucky Draw</title>
+  <title>BASI Pilates — All 5 Workbooks Lucky Draw</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @keyframes pop-in {
@@ -40,15 +40,18 @@
           ✦
         </span>
         <div>
-          <h1 class="font-bold text-lg leading-tight text-white">All 4 Workbooks Lucky Draw</h1>
-          <p class="text-slate-400 text-xs" id="pool-counter">258 exercises in pool</p>
+          <h1 class="font-bold text-lg leading-tight text-white">All 5 Workbooks Lucky Draw</h1>
+          <p class="text-slate-400 text-xs" id="pool-counter">343 exercises in pool</p>
         </div>
       </div>
 
       <!-- Workbook Filter Pills -->
       <div class="flex flex-wrap items-center gap-1.5" id="book-filter-group">
         <button data-book="all" class="book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-indigo-600 text-white cursor-pointer">
-          All 4 Books (258)
+          All 5 Books (343)
+        </button>
+        <button data-book="墊上" class="book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 cursor-pointer">
+          墊上 (85)
         </button>
         <button data-book="基礎核心床凱迪" class="book-btn px-3 py-1 rounded-full text-xs font-medium transition-all bg-slate-800 text-slate-300 hover:bg-slate-700 cursor-pointer">
           基礎核心床凱迪 (95)
@@ -68,7 +71,16 @@
     <!-- Apparatus Quick Filter Row -->
     <div class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar pb-2 mb-4" id="app-filter-group">
       <button data-app="all" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-indigo-500 bg-slate-800 text-white cursor-pointer">
-        All Apparatus (258)
+        All Apparatus (343)
+      </button>
+      <button data-app="Mat" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Mat (61)
+      </button>
+      <button data-app="Magic Circle" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Magic Circle (18)
+      </button>
+      <button data-app="Leg Weights" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
+        Leg Weights (6)
       </button>
       <button data-app="Reformer" class="app-btn shrink-0 px-2.5 py-1 rounded-md text-xs font-medium transition-all border border-transparent bg-slate-950 text-slate-400 hover:text-slate-200 cursor-pointer">
         Reformer (99)
@@ -117,7 +129,7 @@
         </div>
         <div id="exercise-badges" class="flex flex-wrap items-center justify-center gap-1.5 mt-3 min-h-[24px]">
           <span class="px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-400 text-xs">
-            Push the button below to draw from all 4 workbooks
+            Push the button below to draw from all 5 workbooks
           </span>
         </div>
       </div>
@@ -180,6 +192,100 @@
 
   <script>
     const EXERCISES = [
+      // ================= 0. 墊上 (Mat, Magic Circle & Leg Weights - 85 exercises) =================
+      // Fundamental Mat (15-28)
+      { book: "墊上", app: "Mat", p: 15, name: "Pelvic Curl", level: "Fundamental", block: "Foundation", series: "" },
+      { book: "墊上", app: "Mat", p: 16, name: "Spine Twist Supine", level: "Fundamental", block: "Foundation", series: "" },
+      { book: "墊上", app: "Mat", p: 17, name: "Chest Lift", level: "Fundamental", block: "Foundation", series: "" },
+      { book: "墊上", app: "Mat", p: 18, name: "Chest Lift with Rotation", level: "Fundamental", block: "Foundation", series: "" },
+      { book: "墊上", app: "Mat", p: 19, name: "Single Leg Lift", level: "Fundamental", block: "Foundation", series: "" },
+      { book: "墊上", app: "Mat", p: 20, name: "Leg Changes", level: "Fundamental", block: "Foundation", series: "" },
+      { book: "墊上", app: "Mat", p: 21, name: "Hundred Prep", level: "Fundamental", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 22, name: "Roll Up", level: "Fundamental", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 23, name: "Leg Circles", level: "Fundamental", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 24, name: "Roll-Like-a-Ball", level: "Fundamental", block: "Spinal Articulation", series: "" },
+      { book: "墊上", app: "Mat", p: 25, name: "Spine Stretch", level: "Fundamental", block: "Spinal Articulation", series: "" },
+      { book: "墊上", app: "Mat", p: 26, name: "Side Lifts", level: "Fundamental", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 27, name: "Back Extension", level: "Fundamental", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Mat", p: 28, name: "Rest Position", level: "Fundamental", block: "Foundation", series: "" },
+
+      // Intermediate Mat (29-54, 60)
+      { book: "墊上", app: "Mat", p: 29, name: "Hundred", level: "Intermediate", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 30, name: "Double Leg Stretch", level: "Intermediate", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 31, name: "Single Leg Stretch", level: "Intermediate", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 32, name: "Criss Cross", level: "Intermediate", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 33, name: "Saw", level: "Intermediate", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 34, name: "Spine Twist", level: "Intermediate", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 35, name: "Corkscrew", level: "Intermediate", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 36, name: "Single Leg Kick", level: "Intermediate", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Mat", p: 37, name: "Cat Stretch", level: "Intermediate", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 38, name: "Front Support", level: "Intermediate", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 39, name: "Back Support", level: "Intermediate", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 40, name: "Seal Puppy", level: "Intermediate", block: "Spinal Articulation", series: "" },
+      { book: "墊上", app: "Mat", p: 41, name: "Hamstring Pull 1", level: "Intermediate", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 42, name: "Roll Over", level: "Intermediate", block: "Spinal Articulation", series: "" },
+      { book: "墊上", app: "Mat", p: 43, name: "Open Leg Rocker", level: "Intermediate", block: "Spinal Articulation", series: "" },
+      { book: "墊上", app: "Mat", p: 44, name: "Shoulder Bridge Prep", level: "Intermediate", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 45, name: "Side Kick", level: "Intermediate", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 46, name: "Double Leg Kick", level: "Intermediate", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Mat", p: 47, name: "Swimming", level: "Intermediate", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Mat", p: 48, name: "Rocking Prep", level: "Intermediate", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Mat", p: 49, name: "Leg Pull Front", level: "Intermediate", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 50, name: "Leg Pull Back", level: "Intermediate", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 51, name: "Teaser Prep", level: "Intermediate", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 52, name: "Hamstring Pull 2", level: "Intermediate", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 53, name: "Hamstring Pull 3", level: "Intermediate", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 54, name: "Shoulder Bridge", level: "Intermediate", block: "Bridging/Full Body Integration", series: "" },
+
+      // Advanced Mat (55-75, with 60 being Intermediate Swan Dive Prep)
+      { book: "墊上", app: "Mat", p: 55, name: "Control Balance", level: "Advanced", block: "Spinal Articulation", series: "" },
+      { book: "墊上", app: "Mat", p: 56, name: "Jackknife", level: "Advanced", block: "Spinal Articulation", series: "" },
+      { book: "墊上", app: "Mat", p: 57, name: "Hip Circles Prep", level: "Advanced", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 58, name: "Side Kick Kneeling", level: "Advanced", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 59, name: "Side Bend", level: "Advanced", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 60, name: "Swan Dive Prep", level: "Intermediate", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Mat", p: 61, name: "Teaser 1", level: "Advanced", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 62, name: "Neck Pull", level: "Advanced", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Mat", p: 63, name: "Scissors", level: "Advanced", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 64, name: "Bicycle", level: "Advanced", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 65, name: "Corkscrew Advanced", level: "Advanced", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 66, name: "Rocking", level: "Advanced", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Mat", p: 67, name: "Teaser 2", level: "Advanced", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 68, name: "Teaser 3", level: "Advanced", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 69, name: "Hip Circles", level: "Advanced", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 70, name: "Twist", level: "Advanced", block: "Lateral Flexion/Rotation", series: "" },
+      { book: "墊上", app: "Mat", p: 71, name: "Push Up", level: "Advanced", block: "Bridging/Full Body Integration", series: "" },
+      { book: "墊上", app: "Mat", p: 72, name: "Swan Dive Prep with Catch", level: "Advanced", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Mat", p: 73, name: "Swan Dive", level: "Advanced", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Mat", p: 74, name: "Boomerang", level: "Advanced", block: "Spinal Articulation", series: "" },
+      { book: "墊上", app: "Mat", p: 75, name: "Crab", level: "Advanced", block: "Spinal Articulation", series: "" },
+
+      // Gluteals & Magic Circle / Leg Weights Series (76-99)
+      { book: "墊上", app: "Leg Weights", p: 76, name: "Side Leg Lifts", level: "Fundamental", block: "Leg Work", series: "Gluteals Side Lying Series" },
+      { book: "墊上", app: "Leg Weights", p: 77, name: "Forward and Lift", level: "Fundamental", block: "Leg Work", series: "Gluteals Side Lying Series" },
+      { book: "墊上", app: "Leg Weights", p: 78, name: "Forward with Drops", level: "Fundamental", block: "Leg Work", series: "Gluteals Side Lying Series" },
+      { book: "墊上", app: "Magic Circle", p: 79, name: "Adductor Lift", level: "Fundamental", block: "Leg Work", series: "Gluteals Side Lying Series" },
+      { book: "墊上", app: "Leg Weights", p: 80, name: "Hip Extension Bent Knee", level: "Fundamental", block: "Leg Work", series: "Gluteals Kneeling Series" },
+      { book: "墊上", app: "Leg Weights", p: 81, name: "Hip Abduction Bent Knee", level: "Fundamental", block: "Leg Work", series: "Gluteals Kneeling Series" },
+      { book: "墊上", app: "Leg Weights", p: 82, name: "Hip Extension Straight Leg", level: "Fundamental", block: "Leg Work", series: "Gluteals Kneeling Series" },
+      { book: "墊上", app: "Magic Circle", p: 83, name: "Chest Lift (Magic Circle)", level: "Fundamental", block: "Abdominal Work", series: "" },
+      { book: "墊上", app: "Magic Circle", p: 84, name: "Arms Bent", level: "Fundamental", block: "Arm Work", series: "Arms Series" },
+      { book: "墊上", app: "Magic Circle", p: 85, name: "Arms Straight", level: "Fundamental", block: "Arm Work", series: "Arms Series" },
+      { book: "墊上", app: "Magic Circle", p: 86, name: "Arms Overhead", level: "Fundamental", block: "Arm Work", series: "Arms Series" },
+      { book: "墊上", app: "Magic Circle", p: 87, name: "Single Arm Side Press", level: "Fundamental", block: "Arm Work", series: "Arms Series" },
+      { book: "墊上", app: "Magic Circle", p: 88, name: "Single Arm Bicep", level: "Fundamental", block: "Arm Work", series: "Arms Series" },
+      { book: "墊上", app: "Magic Circle", p: 89, name: "Above Knees", level: "Fundamental", block: "Leg Work", series: "Sitting Series" },
+      { book: "墊上", app: "Magic Circle", p: 90, name: "Below Knees", level: "Fundamental", block: "Leg Work", series: "Sitting Series" },
+      { book: "墊上", app: "Magic Circle", p: 91, name: "Ankles (Sitting Series)", level: "Fundamental", block: "Leg Work", series: "Sitting Series" },
+      { book: "墊上", app: "Magic Circle", p: 92, name: "Adductor Squeeze", level: "Fundamental", block: "Leg Work", series: "Supine Series" },
+      { book: "墊上", app: "Magic Circle", p: 93, name: "Knees", level: "Fundamental", block: "Leg Work", series: "Supine Series" },
+      { book: "墊上", app: "Magic Circle", p: 94, name: "Ankles (Supine Series)", level: "Fundamental", block: "Leg Work", series: "Supine Series" },
+      { book: "墊上", app: "Magic Circle", p: 95, name: "Ankles Bent Knees", level: "Fundamental", block: "Leg Work", series: "Prone Series" },
+      { book: "墊上", app: "Magic Circle", p: 96, name: "Ankles Straight Knees", level: "Fundamental", block: "Leg Work", series: "Prone Series" },
+      { book: "墊上", app: "Magic Circle", p: 97, name: "Hamstrings", level: "Fundamental", block: "Leg Work", series: "Prone Series" },
+      { book: "墊上", app: "Magic Circle", p: 98, name: "Swan 1", level: "Fundamental", block: "Back Extension", series: "" },
+      { book: "墊上", app: "Magic Circle", p: 99, name: "Swan 2", level: "Intermediate", block: "Back Extension", series: "" },
+
       // ================= 1. 基礎核心床凱迪 (Foundation Reformer & Cadillac - 95 exercises) =================
       // Reformer (67)
       { book: "基礎核心床凱迪", app: "Reformer", p: 17, name: "Parallel Heels", series: "Supine Series", block: "Foot Work", level: "Fundamental" },
@@ -923,7 +1029,7 @@
       bookBtns.forEach(btn => {
         const b = btn.dataset.book;
         const count = EXERCISES.filter(e => (b === "all" || e.book === b) && (activeApp === "all" || e.app === activeApp)).length;
-        const label = b === "all" ? "All 4 Books" : b;
+        const label = b === "all" ? "All 5 Books" : b;
         btn.textContent = `${label} (${count})`;
       });
       appBtns.forEach(btn => {
